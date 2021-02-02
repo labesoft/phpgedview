@@ -11,27 +11,27 @@
 
     # $Id: readme.txt 6960 2010-04-25 12:47:10Z canajun2eh $
 
-##### Table of Contents
+## Table of Contents
 
-     1.  LICENSE
-     2.  INTRODUCTION
-     3.  SYSTEM REQUIREMENTS
-     4.  QUICK INSTALL
-     5.  INSTALLATION
-     6.  UPGRADING
-     7.  UPDATING GEDCOMS
-     8.  THEMES
-     9.  MULTIMEDIA OBJECTS
-    10.  RSS FEED
-    11.  DATABASE TABLE LAYOUT
-    12.  MANUAL CONFIGURATION
-    13.  SECURITY
-    14.  LANGUAGES
-    15.  NON-STANDARD GEDCOM CODES
-    16.  LANGUAGE EXTENSION FILES
-    17.  MIGRATING FROM SQL TO INDEX MODE AND VICE VERSA
-    18.  POSTNUKE AND PHPNUKE INTEGRATION
-    19.  BACKUP
+1. [LICENSE](#license)
+2. [INTRODUCTION](#introduction)
+3. [SYSTEM REQUIREMENTS](#system-requirements)
+4. [QUICK INSTALL](#quick-install)
+5. [INSTALLATION](#installation)
+6. [UPGRADING](#upgrading)
+7. [UPDATING GEDCOMS](#updating-gedcoms)
+8. [THEMES](#themes)
+9. [MULTIMEDIA OBJECTS](#multimedia-objects)
+10. [RSS FEED](#rss-feed)
+11. [DATABASE TABLE LAYOUT](#database-table-layout)
+12. [MANUAL CONFIGURATION](#manual-configuration)
+13. [SECURITY](#security)
+14. [LANGUAGES](#languages)
+15. [NON-STANDARD GEDCOM CODES](#non-standard-gedcom-codes)
+16. [LANGUAGE EXTENSION FILES](#language-extension-files)
+17. [MIGRATING FROM DATABASE TO INDEX MODE AND VICE VERSA](#migrating-from-database-to-index-mode-and-vice-versa)
+18. [POSTNUKE AND PHPNUKE INTEGRATION](#postnuke-and-phpnuke-integration)
+19. [BACKUP](#backup)
 
 -------------------------------------------------------
 ## LICENSE
@@ -881,7 +881,6 @@ following lines to the extra.en.php file:
     $factarray["_ZZZZ"] = "Tag Label goes here";
     ?>
 
--------------------------------------------------------
 ## LANGUAGE EXTENSION FILES
 
 Language extension files are custom PHP files that you can use to make your
@@ -932,8 +931,6 @@ the GEDCOM get loaded.  This assumes that you have both "english.ged" and
 german.ged have the same people in them, just in a different language.
 Thus I0001 in english.ged should refer to the same I0001 in german.ged.
 
-
--------------------------------------------------------
 ## MIGRATING FROM DATABASE TO INDEX MODE AND VICE VERSA
 
 Older of versions of PhpGedView supported and internal "index" mode format
@@ -947,7 +944,6 @@ DATABASE mode or vice-versa without losing any settings.  The following
 steps have to be made:
 
 ### DATABASE to Index
---------------
  1.  Make sure you have all rights in the ./index/ folder on your web site
      and on the file ./config.php
  2.  Copy the file config.php to configsql.php (or any other name) to
@@ -973,16 +969,15 @@ steps have to be made:
  8.  Check that the above files exist in your index directory.
  9.  Go to Admin, Configuration, change mode to Index and save the
      configuration.
-10.  As all Index mode related files are already present, you should be
+11.  As all Index mode related files are already present, you should be
      able to use your web site in Index mode immediately.
-10.  Import your GEDCOM files again to build the Index database.  You don't
+12.  Import your GEDCOM files again to build the Index database.  You don't
      need to change any GEDCOM settings, as they still exist in the index
      directory and will be used again.
-11.  Test all settings and functions thoroughly before you remove your SQL
+13.  Test all settings and functions thoroughly before you remove your SQL
      database from your web site.
 
 ### Index to DATABASE
---------------
  1.  Make sure you have all rights in the ./index/ folder on your web site
      and on the file ./config.php
  2.  Copy the file config.php to configindex.php (or any other name) to
@@ -995,7 +990,7 @@ steps have to be made:
      define a database, without any tables.
  5.  Create a user in your SQL-DBMS with the following rights on the
      database:
-         SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER.
+	 SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER.
  6.  In PhpGedView, go to Admin, Configuration, and change mode to
      DATABASE, fill in the appropriate SQL-DBMS and database name, user and
      user password and save the configuration.
@@ -1012,7 +1007,6 @@ steps have to be made:
      related files (.\index\*.dat and .\index\authenticate.php) from your
      web site.
 
--------------------------------------------------------
 ## POSTNUKE AND PHPNUKE INTEGRATION
 
 PhpGedView can integrate with PostNuke and phpNuke so that your users do
@@ -1023,7 +1017,6 @@ instructions in the readme.txt file in the pgvnuke folder.
 
 The files that make the integration magic happen were donated by Jim Carey.
 
-===========================================================
 ## BACKUP
 
 With the Backup function in the administration menu, you can make a simple
