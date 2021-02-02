@@ -1,5 +1,4 @@
-=======================================================
-    PhpGedView
+# PhpGedView
 
     Version 4.3
     Copyright (C) 2002 to 2010 PGV Development Team. All rights reserved.
@@ -11,9 +10,9 @@
 	http://wiki.phpgedview.net/en/index.php?title=Installation_Guide
 
     # $Id: readme.txt 6960 2010-04-25 12:47:10Z canajun2eh $
-=======================================================
 
-CONTENTS
+##### Table of Contents
+
      1.  LICENSE
      2.  INTRODUCTION
      3.  SYSTEM REQUIREMENTS
@@ -35,7 +34,7 @@ CONTENTS
     19.  BACKUP
 
 -------------------------------------------------------
-LICENSE
+## LICENSE
 
 PhpGedView: Genealogy Viewer
 Copyright (C) 2002 to 2010  PGV Development Team.  All rights reserved.
@@ -54,7 +53,7 @@ See the file GPL.txt included with this software for more
 detailed licensing information.
 
 -------------------------------------------------------
-INTRODUCTION
+## INTRODUCTION
 
 PhpGedView is a revolutionary genealogy program which allows you to view
 and edit your genealogy on your website.  PhpGedView has full editing
@@ -75,7 +74,7 @@ on the project.  There is also no outside source of revenue to support the
 project.
 
 -------------------------------------------------------
-SYSTEM REQUIREMENTS
+## SYSTEM REQUIREMENTS
 
 PhpGedView requires a web server with at least PHP v5.2 and around 20MB of
 web space.  The default installations of PHP on most servers should provide
@@ -124,7 +123,7 @@ default memory and time limits built into PHP.  See the FAQ at
 http://www.phpgedview.net/faq.php for more information about large GEDCOMs.
 
 -------------------------------------------------------
-QUICK INSTALLATION
+## QUICK INSTALL
 
 These instructions can also be found in the wiki at:
 http://wiki.phpgedview.net/en/index.php?title=Installation_Guide
@@ -166,7 +165,7 @@ Optional Steps
      are done editing or uploading files.
 
 -------------------------------------------------------
-INSTALLATION
+## INSTALLATION
 
 These instructions can also be found in the wiki at:
 http://wiki.phpgedview.net/en/index.php?title=Installation_Guide
@@ -345,12 +344,12 @@ this file you would add the same two lines from the php.ini file above:
 If you need help or support visit  http://www.PhpGedView.net/support.php
 
 -------------------------------------------------------
-UPGRADING
+## UPGRADING
 
 See http://wiki.phpgedview.net/en/index.php?title=Upgrading
 
 -------------------------------------------------------
-UPDATING GEDCOMS
+## UPDATING GEDCOMS
 
 When you change your genealogy data outside of PhpGedView, it is not
 necessary to delete your GEDCOMs from PhpGedView and start over.  Follow
@@ -376,7 +375,7 @@ already existing GEDCOM.  This way existing GEDCOM settings will be
 preserved.
 
 -------------------------------------------------------
-THEMES
+## THEMES
 
 PhpGedView uses a theme based architecture allowing you to have greater
 flexibility over the appearance of the site.  The "themes" directory
@@ -403,7 +402,7 @@ with the project, you should send your theme files to the developers at
 yalnifj@users.sourceforge.net.
 
 -------------------------------------------------------
-MULTIMEDIA OBJECTS
+## MULTIMEDIA OBJECTS
 
 The GEDCOM 5.5 standard supports multimedia files of all types.  PhpGedView 
 supports multimedia objects only as external files.  Multimedia embedded in 
@@ -461,7 +460,7 @@ like this:
     media/thumbs/scan2.jpg
 
 -------------------------------------------------------
-RSS FEED
+## RSS FEED
 
 PGV now includes an RSS feed.  RSS is an XML format that allows other sites
 to get news and other data from your site.  The language used is the
@@ -492,7 +491,7 @@ will output the GEDCOM Stats module in Hebrew in HTML.
 
 
 -------------------------------------------------------
-DATABASE TABLE LAYOUT
+## DATABASE TABLE LAYOUT
 
 PhpGedView uses a very simple database table layout because it operates
 primarily on the GEDCOM data and only needs the database for search and
@@ -709,7 +708,7 @@ this table structure was chosen:
     difficult.
 
 -------------------------------------------------------
-MANUAL CONFIGURATION
+## MANUAL CONFIGURATION
 
 Advanced users who understand PHP may want to configure manually by editing
 the configuration file config.php  When you have finished editing
@@ -740,7 +739,7 @@ for each GEDCOM and set the "privacy" item of the GEDCOMS array to the
 location of the new privacy.php file.
 
 -------------------------------------------------------
-SECURITY
+## SECURITY
 
 Even though PhpGedView gives you the ability to hide the details of living
 individuals, whenever you post the personal details of living individuals
@@ -782,7 +781,7 @@ For more privacy options visit:
 http://www.PhpGedView.net/privacy.php
 
 -------------------------------------------------------
-LANGUAGES
+## LANGUAGES
 
 PhpGedView has built-in support for multiple languages.  PHP does not
 support unicode (UTF-16).  It does support UTF-8 and that is the
@@ -854,7 +853,7 @@ files and your index/lang_settings.php file to the Patches section of the
 SourceForge project site at http://www.sourceforge.net/projects/phpgedview
 
 -------------------------------------------------------
-NON-STANDARD GEDCOM CODES
+## NON-STANDARD GEDCOM CODES
 
 The GEDCOM 5.5 standard has a defined set of codes.  You can read the
 specification online at http://www.PhpGedView.net/ged551-5.pdf  Part of the
@@ -883,7 +882,7 @@ following lines to the extra.en.php file:
     ?>
 
 -------------------------------------------------------
-LANGUAGE EXTENSION FILES
+## LANGUAGE EXTENSION FILES
 
 Language extension files are custom PHP files that you can use to make your
 own language specific extensions to PhpGedView.  To add a language file
@@ -935,7 +934,7 @@ Thus I0001 in english.ged should refer to the same I0001 in german.ged.
 
 
 -------------------------------------------------------
-MIGRATING FROM DATABASE TO INDEX MODE AND VICE VERSA
+## MIGRATING FROM DATABASE TO INDEX MODE AND VICE VERSA
 
 Older of versions of PhpGedView supported and internal "index" mode format
 which allowed it to run without a database.  Since version 4.0, index mode
@@ -947,7 +946,7 @@ Basically it's possible to switch a PhpGedView installation from Index to
 DATABASE mode or vice-versa without losing any settings.  The following
 steps have to be made:
 
-DATABASE to Index
+### DATABASE to Index
 --------------
  1.  Make sure you have all rights in the ./index/ folder on your web site
      and on the file ./config.php
@@ -982,7 +981,7 @@ DATABASE to Index
 11.  Test all settings and functions thoroughly before you remove your SQL
      database from your web site.
 
-Index to DATABASE
+### Index to DATABASE
 --------------
  1.  Make sure you have all rights in the ./index/ folder on your web site
      and on the file ./config.php
@@ -1014,7 +1013,7 @@ Index to DATABASE
      web site.
 
 -------------------------------------------------------
-POSTNUKE AND PHPNUKE INTEGRATION
+## POSTNUKE AND PHPNUKE INTEGRATION
 
 PhpGedView can integrate with PostNuke and phpNuke so that your users do
 not have to login twice.
@@ -1025,7 +1024,7 @@ instructions in the readme.txt file in the pgvnuke folder.
 The files that make the integration magic happen were donated by Jim Carey.
 
 ===========================================================
-BACKUP
+## BACKUP
 
 With the Backup function in the administration menu, you can make a simple
 backup of all important PhpGedview files.  With this backup, it's possible
