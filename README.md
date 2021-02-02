@@ -1,7 +1,8 @@
 # PhpGedView
 
 This project is a fork of the original project provided by PGV Development Team
-At Labesoft we are dedicated to revive that project and the goal
+
+@labesoft we are dedicated to revive that project and the goal
 is to automate (and simplify the process) of setting a dedicated LAMP
 stack server providing the PHPGedView server.
     
