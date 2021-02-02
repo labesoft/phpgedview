@@ -1,5 +1,11 @@
 # PhpGedView
 
+This project is a fork of the original project provided by PGV Development Team
+At Labesoft we are dedicated to revive that project and the goal
+is to automate (and simplify the process) of setting a dedicated LAMP
+stack server providing the PHPGedView server.
+    
+    --------------
     Version 4.3
     Copyright (C) 2002 to 2010 PGV Development Team. All rights reserved.
 
@@ -10,6 +16,7 @@
 	http://wiki.phpgedview.net/en/index.php?title=Installation_Guide
 
     # $Id: readme.txt 6960 2010-04-25 12:47:10Z canajun2eh $
+    --------------
 
 ## Table of Contents
 
