@@ -3,16 +3,16 @@
 # Firewall init
 ufw app list
 ufw allow OpenSSH
-ufw enable
+ufw --force enable
 ufw status
 
 # Apache installation
-apt update && apt -y upgrade
-apt -y install apache2
+apt-get update && apt-get upgrade -y
+apt-get install curl zip unzip apache2 -y
 ufw allow in "Apache"
 
 # MySQL installation
-apt -y install mysql-server
+apt-get -y install mysql-server
 mysql_secure_installation <<EOF
 n
 admin
@@ -37,8 +37,8 @@ SHOW DATABASES;
 EOF
 
 # PHP installation
-apt -y install php libapache2-mod-php php-mysql php-xml php-xml-htmlsax3 php-xmlrpc
-apt -y install php7.4-gd
+apt-get install php libapache2-mod-php php-mysql php-xml php-xml-htmlsax3 php-xmlrpc -y
+apt-get install php7.4-gd -y
 php -v
 
 # Fixing an apache error
