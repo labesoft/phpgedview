@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # Firewall init
 ufw app list
 ufw allow OpenSSH
@@ -60,6 +61,8 @@ EOF
 a2ensite pgv
 a2dissite 000-default
 apache2ctl configtest
+line="ServerName 127.0.0.1"
+[ "`tail -1 /etc/apache2/apache2.conf`" != "$line" ] && echo $line >> /etc/apache2/apache2.conf
 systemctl reload apache2.service
 
 # PhpGed View installation
