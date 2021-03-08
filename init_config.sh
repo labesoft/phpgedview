@@ -48,12 +48,12 @@ systemctl restart apache2.service
 # PhpGed View installation
 GEDVIEW_DIR=/var/www/pgv
 mkdir $GEDVIEW_DIR
-wget https://sourceforge.net/code-snapshots/svn/p/ph/phpgedview/svn/phpgedview-svn-r7290-trunk-phpGedView.zip
+wget https://sourceforge.net/projects/phpgedview/files/latest/download
 unzip phpgedview-svn-r7290-trunk-phpGedView.zip $GEDVIEW_DIR/
 cp $GEDVIEW_DIR/config.dist $GEDVIEW_DIR/config.php
 
 # Bug fix
-wget https://sourceforge.net/p/phpgedview/discussion/185166/thread/6ddd158/1a5/2bac/attachment/functions_mediadb.php
+wget https://sourceforge.net/p/phpgedview/svn/HEAD/tree/trunk/phpGedView/includes/functions/functions_mediadb.php
 cp functions_mediadb.php $GEDVIEW_DIR/includes/functions/
 
 # Permissions
