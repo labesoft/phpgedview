@@ -27,12 +27,13 @@ EOF
 # MySQL config
 mysql -pubuntuadmin << EOF
 CREATE DATABASE pgvdb;
-CREATE USER 'pgv'@'%' IDENTIFIED WITH pgvpwd BY 'pgv';
-GRANT ALL ON pgvdb.* TO 'pgv'@'%';
+CREATE USER 'pgv'@'localhost' IDENTIFIED BY 'pgv';
+GRANT ALL PRIVILEGES ON pgvdb.* TO 'pgv'@'localhost';
+FLUSH PRIVILEGES;
 EOF
 
 # Test the config
-mysql -u pgv -ppgvpwd << EOF
+mysql -u pgv -ppgv << EOF
 SHOW DATABASES;
 EOF
 
@@ -41,19 +42,33 @@ apt-get install php libapache2-mod-php php-mysql php-xml php-xml-htmlsax3 php-xm
 apt-get install php7.4-gd -y
 php -v
 
-# Fixing an apache error
-echo "ServerName 127.0.0.1" >> /etc/apache2/apache2.conf
-systemctl restart apache2.service
-
-# PhpGed View installation
+# Config apache
 GEDVIEW_DIR=/var/www/pgv
 mkdir $GEDVIEW_DIR
-wget https://sourceforge.net/projects/phpgedview/files/latest/download
-unzip phpgedview-svn-r7290-trunk-phpGedView.zip $GEDVIEW_DIR/
-cp $GEDVIEW_DIR/config.dist $GEDVIEW_DIR/config.php
+MYUSER=ubuntu
+chown -R $MYUSER:$MYUSER $GEDVIEW_DIR
+cat << EOF > /etc/apache2/sites-available/pgv.conf 
+<VirtualHost *:80>
+    # ServerName pgv
+    # ServerAlias www.pgv
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/pgv
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+EOF
+a2ensite pgv
+a2dissite 000-default
+apache2ctl configtest
+systemctl reload apache2.service
+
+# PhpGed View installation
+ZIPFILENAME=phpgedview.zip 
+wget -O $ZIPFILENAME https://sourceforge.net/projects/phpgedview/files/latest/download
+unzip -o $ZIPFILENAME -d $GEDVIEW_DIR
 
 # Bug fix
-wget https://sourceforge.net/p/phpgedview/svn/HEAD/tree/trunk/phpGedView/includes/functions/functions_mediadb.php
+wget -O functions_mediadb.php https://sourceforge.net/p/phpgedview/svn/HEAD/tree/trunk/phpGedView/includes/functions/functions_mediadb.php?format=raw
 cp functions_mediadb.php $GEDVIEW_DIR/includes/functions/
 
 # Permissions
