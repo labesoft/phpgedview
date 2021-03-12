@@ -1,5 +1,13 @@
 #!/bin/bash
 
+if [ $# -eq 1 ]; then
+    pwd="$1"
+fi
+
+# Set local time
+timedatectl set-timezone America/Toronto
+timedatectl set-ntp True
+timedatectl status
 
 # Firewall init
 ufw app list
@@ -14,28 +22,29 @@ ufw allow in "Apache"
 
 # MySQL installation
 apt-get -y install mysql-server
-mysql_secure_installation <<EOF
-n
-admin
-admin
-y
-y
-y
-y
-y
+
+# MySQL secure config (including secure installation part)
+mysql << EOF
+UPDATE mysql.user SET Password='${pwd}' WHERE User='root';
+DELETE FROM mysql.user WHERE User=''; 
+DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'); 
+DROP DATABASE IF EXISTS test;
+DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'
+FLUSH PRIVILEGES;
 EOF
 
-# MySQL config
-mysql -pubuntuadmin << EOF
+# MySQL pgv config
+mysql << EOF
 CREATE DATABASE pgvdb;
 CREATE USER 'pgv'@'localhost' IDENTIFIED BY 'pgv';
 GRANT ALL PRIVILEGES ON pgvdb.* TO 'pgv'@'localhost';
 FLUSH PRIVILEGES;
 EOF
 
-# Test the config
+# Test MySQL config
 mysql -u pgv -ppgv << EOF
-SHOW DATABASES;
+SHOW DATABASES LIKE 'pgv%';
+SELECT user, host FROM mysql.user WHERE user LIKE 'pgv%';
 EOF
 
 # PHP installation
@@ -67,11 +76,11 @@ systemctl reload apache2.service
 
 # PhpGed View installation
 ZIPFILENAME=phpgedview.zip 
-wget -O $ZIPFILENAME https://sourceforge.net/projects/phpgedview/files/latest/download
+wget -O $ZIPFILENAME https://sourceforge.net/projects/phpgedview/files/latest/download 2>&1
 unzip -o $ZIPFILENAME -d $GEDVIEW_DIR
 
 # Bug fix
-wget -O functions_mediadb.php https://sourceforge.net/p/phpgedview/svn/HEAD/tree/trunk/phpGedView/includes/functions/functions_mediadb.php?format=raw
+wget -O functions_mediadb.php https://sourceforge.net/p/phpgedview/svn/HEAD/tree/trunk/phpGedView/includes/functions/functions_mediadb.php?format=raw 2>&1
 cp functions_mediadb.php $GEDVIEW_DIR/includes/functions/
 
 # Permissions
@@ -81,3 +90,8 @@ chmod -R 777 $GEDVIEW_DIR/config.php
 chmod -R 777 $GEDVIEW_DIR/languages
 chmod 777 $GEDVIEW_DIR/media
 chmod 777 $GEDVIEW_DIR/media/thumbs
+
+# Removing cloud init
+apt purge cloud-init -y 
+rm -rf /etc/cloud && sudo rm -rf /var/lib/cloud/
+
