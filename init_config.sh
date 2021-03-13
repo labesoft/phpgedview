@@ -2,6 +2,9 @@
 
 if [ $# -eq 1 ]; then
     pwd="$1"
+elif [ $# -eq 0 ]; then
+    pwd="myAdmin123@"
+    echo Using password: pwd="$pwd"
 fi
 
 # Set local time
@@ -25,24 +28,20 @@ apt-get -y install mysql-server
 
 # MySQL secure config (including secure installation part)
 mysql << EOF
-UPDATE mysql.user SET Password='${pwd}' WHERE User='root';
-DELETE FROM mysql.user WHERE User=''; 
-DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1'); 
+ALTER USER 'root'@'localhost' IDENTIFIED BY "$pwd";
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
+DELETE FROM mysql.user WHERE User='';
+DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
 DROP DATABASE IF EXISTS test;
-DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'
-FLUSH PRIVILEGES;
-EOF
-
-# MySQL pgv config
-mysql << EOF
+DELETE FROM mysql.db WHERE Db='test' OR Db='test_%';
 CREATE DATABASE pgvdb;
-CREATE USER 'pgv'@'localhost' IDENTIFIED BY 'pgv';
+CREATE USER 'pgv'@'localhost' IDENTIFIED BY '$pwd';
 GRANT ALL PRIVILEGES ON pgvdb.* TO 'pgv'@'localhost';
 FLUSH PRIVILEGES;
 EOF
 
 # Test MySQL config
-mysql -u pgv -ppgv << EOF
+mysql -u pgv -p"$pwd" << EOF
 SHOW DATABASES LIKE 'pgv%';
 SELECT user, host FROM mysql.user WHERE user LIKE 'pgv%';
 EOF
@@ -92,6 +91,6 @@ chmod 777 $GEDVIEW_DIR/media
 chmod 777 $GEDVIEW_DIR/media/thumbs
 
 # Removing cloud init
-apt purge cloud-init -y 
-rm -rf /etc/cloud && sudo rm -rf /var/lib/cloud/
+apt-get purge cloud-init -y 
+rm -rf /etc/cloud && rm -rf /var/lib/cloud/
 
