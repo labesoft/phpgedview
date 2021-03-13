@@ -11,6 +11,12 @@ fi
 timedatectl set-timezone America/Toronto
 timedatectl set-ntp True
 timedatectl status
+cat > /etc/issue << EOF
+Ubuntu 20.04.2 LTS \n \l
+\d \t
+
+EOF
+
 
 # Firewall init
 ufw app list
