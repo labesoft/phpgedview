@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [ $# -eq 1 ]; then
-    pwd="$1"
-elif [ $# -eq 0 ]; then
+if [ $# -eq 0 ]; then
     pwd="myAdmin123@"
     echo Using password: pwd="$pwd"
+else
+    pwd="$1"
 fi
 
 # Set local time
