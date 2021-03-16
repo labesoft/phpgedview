@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $# -eq 0 ]; then
+if [[ $# -eq 0 ]]; then
     pwd="myAdmin123@"
     echo Using password: pwd="$pwd"
 else
